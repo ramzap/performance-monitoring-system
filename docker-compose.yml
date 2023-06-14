@@ -9,7 +9,22 @@ services:
       - '2003:2003'
    telegraf:
     build: telegraf
+    environment:
+      - HOST_MOUNT_PREFIX=/hostfs
+      - HOST_PROC=/hostfs/proc
+      - HOST_SYS=/hostfs/sys
+      - HOST_ETC=/hostfs/etc
+      - HOST_VAR=/hostfs/var
+      - HOST_RUN=/hostfs/run
     env_file: configuration.env
+    volumes:
+      - /:/hostfs:ro
+      - /etc:/hostfs/etc:ro
+      - /proc:/hostfs/proc:ro
+      - /sys:/hostfs/sys:ro
+      - /var/run/utmp:/var/run/utmp:ro
+    privileged: true
+    network_mode: "host"
     depends_on:
       - influxdb
     links:
