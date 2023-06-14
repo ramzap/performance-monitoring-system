@@ -22,9 +22,7 @@ services:
       - /etc:/hostfs/etc:ro
       - /proc:/hostfs/proc:ro
       - /sys:/hostfs/sys:ro
-      - /var/run/utmp:/var/run/utmp:ro
     privileged: true
-    network_mode: "host"
     depends_on:
       - influxdb
     links:
