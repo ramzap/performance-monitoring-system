@@ -20,9 +20,9 @@ Other way is to setup jenkins on docker: https://octopus.com/blog/jenkins-docker
 10. Now to have fully working solution you need to config gatling config file for enabling graphite results. Open intelij open cloned project "gatling-fundamentals-java-api".
 11. Navigate src>resources>gatling.conf file uncomment these lines 106 (writers line and added to it graphite), 117-125(graphite configuration, change in it host to "localhost"). Save your changes.
 12. Run gatling engine and select one of available simulations.
-13. Check that in infludb you have database graphite, and it is not empty. You can do this by opening folder in which you have cloned my repo, open new terminal in this folder location.
+13. Check that in infludb you have database gatlingdb, and it is not empty. You can do this by opening folder in which you have cloned my repo, open new terminal in this folder location.
  Type in "docker ps", find influxdb container id and write down it somwhere for you. Run now this command "docker exec-it yourInfluxdbContainerId influx" (example: docker exec-it b9166d4c5bce influx).
- Hit enter. Now you have connected to database. Type in "SHOW databases". You should be able to see database graphite, type in terminal "SHOW entries",
+ Hit enter. Now you have connected to database. Type in "SHOW databases". You should be able to see database gatlingdb, type in terminal "Use gatlingdb"  and after that then "SHOW entries",
  if you get something that is all you need to be able to get data to Grafana.
  14. Now to be able to configure dashboards in Grafana you need to create grafana datasource connection. Go to grafana  Data sources select InfluxDb type. 
  In field URL type in http://influxdb:8086, in Database field type in gatlingdb. In field User type in admin. Press Save&test button. It should bee green indicating that everything works as expected.
